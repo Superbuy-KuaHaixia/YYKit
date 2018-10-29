@@ -285,8 +285,8 @@
         if ([window isKindOfClass:self.class]) break; //don't capture window above self
         CGContextSaveGState(context);
         CGContextConcatCTM(context, YYCGAffineTransformGetFromViews(window, self));
-        [window.layer renderInContext:context]; //render
-        //[window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO]; //slower when capture whole window
+        // [window.layer renderInContext:context]; //render crash in ios 10+
+        [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO]; //slower when capture whole window
         CGContextRestoreGState(context);
     }
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
